@@ -17,9 +17,9 @@ const inter = Inter({ subsets: ['latin'] })
 const ExpandedComponent = ({ data }) => 
   <pre>
     <ul>
-      <li><a href={data.url}>Homepage</a></li>
+      <li>Information Page: <a href={data.url}>{data.name}</a></li>
       <li>Last update {moment.unix(Number(data.updated)).fromNow()}</li>
-      <li>Mastodon: <a href={data.url+"inbox" } target="_blank" rel="noopener noreferrer">
+      <li>Mastodon/Misskey: <a href={data.url+"inbox" } target="_blank" rel="noopener noreferrer">
         {data.url}inbox
       </a></li>
       <li>Pleroma: <a href={data.url+"actor" } target="_blank" rel="noopener noreferrer">
@@ -39,7 +39,17 @@ const columns = [
     // ),
   },
   {
-    name: "Servers",
+    name: "Address",
+    //selector: row => row.url,
+    sortable: true,
+    cell: (row) => (
+      <a href={row.url} target="_blank" rel="noopener noreferrer">
+        {row.url}
+      </a>
+    ),
+  },
+  {
+    name: "Participants",
     selector: (row) => Number(row.server_count),
     sortable: true,
   },
@@ -127,7 +137,8 @@ export default function Home() {
       <main className={styles.main}>
         <h1 className={styles.title}>RelayList.com</h1>
         <p>A list of relays that can be added to a Mastodon, Misskey, or Pleroma server.</p>
-        <DataTable columns={columns} data={data} defaultSortFieldId={1} expandableRows expandableRowsComponent={ExpandedComponent} striped bordered hover/>
+        <DataTable columns={columns} data={data} defaultSortFieldId={1} expandableRows expandableRowsComponent={ExpandedComponent} 
+            striped bordered hover/>
       <footer className={styles.main}><p>Created by <a href="https://lap.social/@mike">Mike Lapidakis</a>. DM for additions and feedback.</p></footer>
       </main>
     </>
