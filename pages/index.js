@@ -84,6 +84,14 @@ const columns = [
 		],
   },
   {
+    name: "Mastodon URL",
+    cell: (row) => (
+      <a href={row.url+"inbox" } target="_blank" rel="noopener noreferrer">
+        {row.url}inbox
+      </a>
+    ),
+  },  
+  {
     name: "Last Updated",
     sortable: true,
     cell: (row) => (
@@ -95,7 +103,7 @@ const columns = [
 
 export default function Home() {
 
-  const [data, setData] = useState([]);
+  const [data, setData, updateAt] = useState([]);
 
   useEffect(() => {
     axios
@@ -104,7 +112,6 @@ export default function Home() {
       )
       .then(response => {
         setData(response.data);
-        console.log(data)
       })
       .catch(function(error) {
         console.log(error);
@@ -120,10 +127,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <h1 className={styles.title}>Relay List for the Fediverse</h1>
-        <p>This is a list of relays to add to your Mastsodon server</p>
+        <h1 className={styles.title}>RelayList.com</h1>
+        <p>A list of relays that can be added to a Mastodon, Missket, or Pleroma server.</p>
         <DataTable columns={columns} data={data} defaultSortFieldId={2} striped bordered hover/>
-      <footer className={styles.main}><p>Created by <a href="https://lap.social/@mike">Mike Lapidakis</a></p></footer>
+      <footer className={styles.main}><p>Created by <a href="https://lap.social/@mike">Mike Lapidakis</a>. DM for additions and feedback.</p></footer>
       </main>
     </>
   );
