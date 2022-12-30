@@ -18,12 +18,14 @@ const ExpandedComponent = ({ data }) =>
   <pre>
     <ul>
       <li>Information Page: <a href={data.url}>{data.name}</a></li>
+      <li>Admin: {data.moderator}</li>
       <li>Last update {moment.unix(Number(data.updated)).fromNow()}</li>
       <li>Mastodon/Misskey: <a href={data.url+"inbox" } target="_blank" rel="noopener noreferrer">
         {data.url}inbox
       </a></li>
       <li>Pleroma: <a href={data.url+"actor" } target="_blank" rel="noopener noreferrer">
         {data.url}actor</a></li>
+      <li>Notes: {data.notes}</li>
     </ul>
   </pre>;
 
