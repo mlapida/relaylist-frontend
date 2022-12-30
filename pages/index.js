@@ -152,7 +152,7 @@ export default function Home() {
         <p>A list of relays that can be added to a Mastodon, Misskey, or Pleroma server.</p>
         <DataTable columns={columns} data={data} defaultSortFieldId={3} defaultSortAsc={false} expandableRows expandableRowsComponent={ExpandedComponent} 
             striped bordered hover/>
-      <footer className={styles.main}><p>Created by <a rel="me" href="https://mastodon.lapidak.is/@mike">Mike Lapidakis</a>. DM for additions and feedback.</p></footer>
+      <footer className={styles.main}><p>Created by <a rel="me" target="_blank" href="https://mastodon.lapidak.is/@mike">Mike</a> | DM for additions and feedback | <a target="_blank" href="https://empty.coffee/why-i-built-relaylist-mastodon/">About Relay List</a></p></footer>
       </main>
     </>
   );
