@@ -222,7 +222,7 @@ export default function Home() {
                   <p>
                     As an administrator of an ActivityPub server, such as
                     Mastodon, there are important considerations to be made
-                    before adding a relay. It's essential to know that relays
+                    before adding a relay. It&apos;s essential to know that relays
                     replicate all local content from all participating servers
                     to your server. There are costs associated with this action.
                     You should always add relays with caution!
@@ -256,7 +256,7 @@ export default function Home() {
                     with the load adding a relay cause. It is best to review the
                     servers participating to gauge activity. For instance,
                     relays that have a few large, very active servers subscribed
-                    will impact your server's resources more than relays that
+                    will impact your server&apos;s resources more than relays that
                     have numerous small servers subscribed. 
                   </p>
                 </Accordion.Body>
