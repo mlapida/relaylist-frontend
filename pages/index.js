@@ -9,6 +9,7 @@ import Alert from 'react-bootstrap/Alert';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Layout from '../components/layout'
 
 
 import axios from "axios";
@@ -59,7 +60,7 @@ const columns = [
     sortable: true,
     cell: (row) => (
       <a href={row.url} target="_blank" rel="noopener noreferrer">
-        {row.url}
+        {row.url.split("/")[2]}
       </a>
     ),
   },
@@ -143,36 +144,11 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>Relay List - Connecting the Fediverse</title>
-        <meta name="description" content="A regularly updated list of relays for use with Mastodon, Misskey, Pleroma and other ActivityPub servers." />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        
-        <meta property="og:url" content="https://relaylist.com" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Relay List - Connecting the Fediverse" />
-        <meta property="og:description" content="A regularly updated list of relays for use with Mastodon, Misskey, Pleroma and other ActivityPub servers." />
-        <meta property="og:image" content="/train.png" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="relaylist.com" />
-        <meta property="twitter:url" content="https://relaylist.com" />
-        <meta name="twitter:title" content="Relay List - Connecting the Fediverse" />
-        <meta name="twitter:description" content="A regularly updated list of relays for use with Mastodon, Misskey, Pleroma and other ActivityPub servers." />
-        <meta name="twitter:image" content="/train.png" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main className={styles.main}>
-      <Container>
-      <Row><h1 className={styles.title}>RelayList.com</h1></Row>
-        <Row><p>A list of relays that can be added to a Mastodon, Misskey, or Pleroma server.</p></Row>
+      <Layout>
         <Row><Alert variant="warning">Please add relays with caution! <Alert.Link href="/info">Learn more...</Alert.Link></Alert></Row>
         <Row><DataTable columns={columns} data={data} defaultSortFieldId={3} defaultSortAsc={false} expandableRows expandableRowsComponent={ExpandedComponent} 
-            striped bordered hover/></Row>
-      <Row><footer className={styles.main}><p>Created by <a rel="me" href="https://mastodon.lapidak.is/@mike">Mike</a> | DM for additions and feedback | <a href="https://empty.coffee/why-i-built-relaylist-mastodon/">About Relay List</a></p></footer>
-      </Row>
-      </Container>
-      </main>
+              striped bordered hover/></Row>
+      </Layout>
     </>
   );
 }
