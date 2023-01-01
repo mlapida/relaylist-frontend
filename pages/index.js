@@ -37,15 +37,15 @@ function makeFediLink(name) {
 
 const ExpandedComponent = ({ data }) => 
   <Container fluid>
-    <Row><Col><i>Last update {moment.unix(Number(data.updated)).fromNow()}</i></Col></Row>
-    <Row><Col xs={2} md={4}><b>Information Page:</b></Col> <Col><a href={data.url}>{data.name}</a></Col></Row>
-    <Row><Col xs={2} md={4}><b>Admin:</b></Col> <Col><a href={makeFediLink(data.moderator)} target="_blank" rel="noopener noreferrer">{data.moderator}</a></Col></Row>
-    <Row><Col xs={2} md={4}><b>Mastodon:</b></Col> <Col><a href={data.url+"inbox" } target="_blank" rel="noopener noreferrer">
+    <Row><Col xs={2} md={2}><b>Homepage:</b></Col> <Col><a href={data.url} target="_blank" rel="noopener noreferrer">{data.name}</a></Col></Row>
+    <Row><Col xs={2} md={2}><b>Admin:</b></Col> <Col><a href={makeFediLink(data.moderator)} target="_blank" rel="noopener noreferrer">{data.moderator}</a></Col></Row>
+    <Row><Col xs={2} md={2}><b>Mastodon:</b></Col> <Col><a href={data.url+"inbox" } target="_blank" rel="noopener noreferrer">
       {data.url}inbox
     </a></Col></Row>
-    <Row><Col xs={2} md={4}><b>Pleroma:</b></Col> <Col><a href={data.url+"actor" } target="_blank" rel="noopener noreferrer">
+    <Row><Col xs={2} md={2}><b>Pleroma:</b></Col> <Col><a href={data.url+"actor" } target="_blank" rel="noopener noreferrer">
       {data.url}actor</a></Col></Row>
     <Row><Col xs={6} md={12}><b>Notes:</b><p>{data.notes}</p></Col></Row>
+    <Row><Col><i>Last update {moment.unix(Number(data.updated)).fromNow()}</i></Col></Row>
   </Container>;
 
 const columns = [
