@@ -6,6 +6,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Layout from "../components/layout";
+import Accordion from "react-bootstrap/Accordion";
 
 import axios from "axios";
 import React, { useState, useEffect } from "react";
@@ -179,10 +180,90 @@ export default function Home() {
     <>
       <Layout>
         <Row>
-          <Alert variant="warning">
-            Please add relays with caution!{" "}
-            <Alert.Link href="/info">Learn more...</Alert.Link>
-          </Alert>
+          <Col></Col>
+          <Col xs={10}>
+            <Alert variant="warning">Please add relays with caution!</Alert>
+          </Col>
+          <Col></Col>
+        </Row>
+        <Row>
+          <Col></Col>
+          <Col xs={10}>
+            <Accordion flush>
+              <Accordion.Item eventKey="0">
+                <Accordion.Header>What is Relay List?</Accordion.Header>
+                <Accordion.Body>
+                  <p>
+                    Relay List is a site that indexes and tracks various
+                    ActivityPub relays that have been shared with the public or
+                    with the creator. Each relay is checked every 30 minutes,
+                    updating the number of participating servers, the
+                    registration status, and if the relay is online. This
+                    information is useful for server administrators when
+                    considering adding a relay to their instance.
+                  </p>
+                  <p>
+                    DM <a href="">Mike</a> to have relays added, fields updates,
+                    or removal and moderation requests.
+                  </p>
+                </Accordion.Body>
+              </Accordion.Item>
+              <Accordion.Item eventKey="1">
+                <Accordion.Header>
+                  Adding a relay to your server
+                </Accordion.Header>
+                <Accordion.Body>Coming soon.</Accordion.Body>
+              </Accordion.Item>
+              <Accordion.Item eventKey="2">
+                <Accordion.Header>
+                  Considerations before adding
+                </Accordion.Header>
+                <Accordion.Body>
+                  <p>
+                    As an administrator of an ActivityPub server, such as
+                    Mastodon, there are important considerations to be made
+                    before adding a relay. It's essential to know that relays
+                    replicate all local content from all participating servers
+                    to your server. There are costs associated with this action.
+                    You should always add relays with caution!
+                  </p>
+                  <p>
+                    <strong>Pros:</strong>
+                  </p>
+                  <ul>
+                    <li>
+                      Increased activity in the federated feed of your server
+                    </li>
+                    <li>Improved hashtag results for users</li>
+                    <li>
+                      Expanded reach for users as posts are sent to all
+                      participants in subscribed relays
+                    </li>
+                  </ul>
+                  <p>
+                    <strong>Cons:</strong>
+                  </p>
+                  <ul>
+                    <li>Increased media storage requirements and cost</li>
+                    <li>Increased resource demands</li>
+                    <li>
+                      Cost and performance of smaller deployments may be
+                      negatively impacted
+                    </li>
+                  </ul>
+                  <p>
+                    Finally, the participants number does not directly correlate
+                    with the load adding a relay cause. It is best to review the
+                    servers participating to gauge activity. For instance,
+                    relays that have a few large, very active servers subscribed
+                    will impact your server's resources more than relays that
+                    have numerous small servers subscribed. 
+                  </p>
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+          </Col>
+          <Col></Col>
         </Row>
         <Row>
           <DataTable

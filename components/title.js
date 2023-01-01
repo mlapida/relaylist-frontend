@@ -1,18 +1,17 @@
 import Row from "react-bootstrap/Row";
-import styles from "../styles/Home.module.css";
+import Col from "react-bootstrap/Col";
+import Navigation from "./navbar";
+import Stack from "react-bootstrap/Stack";
 
 export default function Title({ children }) {
   return (
     <>
-      <Row>
-        <h1 className={styles.title}>RelayList.com</h1>
-      </Row>
-      <Row>
-        <p>
-          A list of relay servers that can be added to a Mastodon, Misskey, or
-          Pleroma instance.
-        </p>
-      </Row>
+      <Stack gap={3}>
+        <div>
+          <Navigation />
+        </div>
+        <div></div>
+      </Stack>
     </>
   );
 }
