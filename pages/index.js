@@ -7,6 +7,11 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Layout from "../components/layout";
 import Accordion from "react-bootstrap/Accordion";
+import {
+  InfoCircleFill,
+  ExclamationCircleFill,
+  ExclamationTriangleFill,
+} from "react-bootstrap-icons";
 
 import axios from "axios";
 import React, { useState, useEffect } from "react";
@@ -204,7 +209,10 @@ export default function Home() {
         <Row>
           <Col></Col>
           <Col xs={10}>
-            <Alert variant="warning">Please add relays with caution!</Alert>
+            <Alert variant="warning">
+              <ExclamationTriangleFill />
+              &nbsp;Please add relays with caution!
+            </Alert>
           </Col>
           <Col></Col>
         </Row>
@@ -213,7 +221,10 @@ export default function Home() {
           <Col xs={10}>
             <Accordion>
               <Accordion.Item eventKey="0">
-                <Accordion.Header>What is Relay List?</Accordion.Header>
+                <Accordion.Header>
+                  <InfoCircleFill />
+                  &nbsp;What is Relay List?
+                </Accordion.Header>
                 <Accordion.Body>
                   <p>
                     Relay List is a site that indexes and tracks various
@@ -225,20 +236,22 @@ export default function Home() {
                     considering adding a relay to their instance.
                   </p>
                   <p>
-                    DM <a href="">Mike</a> to have relays added, fields updates,
-                    or removal and moderation requests.
+                    DM <a href="https://lapidak.is/@mike">Mike</a> to have
+                    relays added, fields updates, or removal and moderation
+                    requests.
                   </p>
                 </Accordion.Body>
               </Accordion.Item>
-              <Accordion.Item eventKey="1">
+              {/* <Accordion.Item eventKey="1">
                 <Accordion.Header>
-                  Adding a relay to your server
+                <InfoCircleFill />&nbsp;Adding a relay to your server
                 </Accordion.Header>
                 <Accordion.Body>Coming soon.</Accordion.Body>
-              </Accordion.Item>
+              </Accordion.Item> */}
               <Accordion.Item eventKey="2">
                 <Accordion.Header>
-                  Considerations before adding
+                  <ExclamationTriangleFill />
+                  &nbsp;Considerations before adding
                 </Accordion.Header>
                 <Accordion.Body>
                   <p>
@@ -280,7 +293,7 @@ export default function Home() {
                     servers participating to gauge activity. For instance,
                     relays that have a few large, very active servers subscribed
                     will impact your server&apos;s resources more than relays
-                    that have numerous small servers subscribed. 
+                    that have numerous small servers subscribed.
                   </p>
                 </Accordion.Body>
               </Accordion.Item>
@@ -304,6 +317,7 @@ export default function Home() {
               striped
               bordered
               hover
+              me
             />
           </div>
         </Row>
