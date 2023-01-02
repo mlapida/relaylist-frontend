@@ -26,6 +26,17 @@ function makeFediLink(name) {
   return output;
 }
 
+function regStatus(reg){
+  var output 
+
+  if (reg == true){
+    output = "open"
+  } else {
+    output = "closed"
+  }
+  return output;
+}
+
 const ExpandedComponent = ({ data }) => (
   <Container fluid>
     <Row>
@@ -108,7 +119,7 @@ const columns = [
   },
   {
     name: "Registration",
-    selector: (row) => row.openRegistrations.toString(),
+    selector: (row) => regStatus(row.openRegistrations),
     sortable: true,
     conditionalCellStyles: [
       {
@@ -265,6 +276,7 @@ export default function Home() {
           </Col>
           <Col></Col>
         </Row>
+        <Row><p></p></Row>
         <Row>
           <DataTable
             columns={columns}
