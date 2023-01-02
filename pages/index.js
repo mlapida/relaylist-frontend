@@ -272,6 +272,7 @@ export default function Home() {
                       Cost and performance of smaller deployments may be
                       negatively impacted
                     </li>
+                    <li>Increased moderation responsibilities</li>
                   </ul>
                   <p>
                     Finally, the participants number does not directly correlate
