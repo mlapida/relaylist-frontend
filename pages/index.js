@@ -37,6 +37,17 @@ function regStatus(reg){
   return output;
 }
 
+function onlineStatus(reg){
+  var output 
+
+  if (reg == true){
+    output = "up"
+  } else {
+    output = "down"
+  }
+  return output;
+}
+
 const ExpandedComponent = ({ data }) => (
   <Container fluid>
     <Row>
@@ -146,7 +157,7 @@ const columns = [
   },
   {
     name: "Online",
-    selector: (row) => row.up.toString(),
+    selector: (row) => onlineStatus(row.up),
     sortable: true,
     conditionalCellStyles: [
       {
