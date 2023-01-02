@@ -14,9 +14,7 @@ export default function Footer({ children }) {
                 Mike
               </a>
             </Col>
-            <Col md="auto">&middot;</Col>
             <Col md="auto">DM for additions and feedback</Col>
-            <Col md="auto">&middot;</Col>
             <Col md="auto">
               <a href="https://empty.coffee/why-i-built-relaylist-mastodon/">
                 About Relay List

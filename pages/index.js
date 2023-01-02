@@ -26,24 +26,24 @@ function makeFediLink(name) {
   return output;
 }
 
-function regStatus(reg){
-  var output 
+function regStatus(reg) {
+  var output;
 
-  if (reg == true){
-    output = "open"
+  if (reg == true) {
+    output = "open";
   } else {
-    output = "closed"
+    output = "closed";
   }
   return output;
 }
 
-function onlineStatus(reg){
-  var output 
+function onlineStatus(reg) {
+  var output;
 
-  if (reg == true){
-    output = "up"
+  if (reg == true) {
+    output = "up";
   } else {
-    output = "down"
+    output = "down";
   }
   return output;
 }
@@ -244,10 +244,10 @@ export default function Home() {
                   <p>
                     As an administrator of an ActivityPub server, such as
                     Mastodon, there are important considerations to be made
-                    before adding a relay. It&apos;s essential to know that relays
-                    replicate all local content from all participating servers
-                    to your server. There are costs associated with this action.
-                    You should always add relays with caution!
+                    before adding a relay. It&apos;s essential to know that
+                    relays replicate all local content from all participating
+                    servers to your server. There are costs associated with this
+                    action. You should always add relays with caution!
                   </p>
                   <p>
                     <strong>Pros:</strong>
@@ -278,8 +278,8 @@ export default function Home() {
                     with the load adding a relay cause. It is best to review the
                     servers participating to gauge activity. For instance,
                     relays that have a few large, very active servers subscribed
-                    will impact your server&apos;s resources more than relays that
-                    have numerous small servers subscribed. 
+                    will impact your server&apos;s resources more than relays
+                    that have numerous small servers subscribed. 
                   </p>
                 </Accordion.Body>
               </Accordion.Item>
@@ -287,23 +287,24 @@ export default function Home() {
           </Col>
           <Col></Col>
         </Row>
-        <Row><p></p></Row>
         <Row>
-        <div className="App">
-      <div className="card">
-          <DataTable
-            columns={columns}
-            data={data}
-            defaultSortFieldId={3}
-            defaultSortAsc={false}
-            expandableRows
-            expandOnRowClicked
-            expandableRowsComponent={ExpandedComponent}
-            striped
-            bordered
-            hover
-          />
-          </div></div>
+          <p></p>
+        </Row>
+        <Row>
+          <div className="card">
+            <DataTable
+              columns={columns}
+              data={data}
+              defaultSortFieldId={3}
+              defaultSortAsc={false}
+              expandableRows
+              expandOnRowClicked
+              expandableRowsComponent={ExpandedComponent}
+              striped
+              bordered
+              hover
+            />
+          </div>
         </Row>
       </Layout>
     </>
