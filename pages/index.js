@@ -211,7 +211,7 @@ export default function Home() {
         <Row>
           <Col></Col>
           <Col xs={10}>
-            <Accordion flush>
+            <Accordion>
               <Accordion.Item eventKey="0">
                 <Accordion.Header>What is Relay List?</Accordion.Header>
                 <Accordion.Body>
@@ -289,17 +289,21 @@ export default function Home() {
         </Row>
         <Row><p></p></Row>
         <Row>
+        <div className="App">
+      <div className="card">
           <DataTable
             columns={columns}
             data={data}
             defaultSortFieldId={3}
             defaultSortAsc={false}
             expandableRows
+            expandOnRowClicked
             expandableRowsComponent={ExpandedComponent}
             striped
             bordered
             hover
           />
+          </div></div>
         </Row>
       </Layout>
     </>
