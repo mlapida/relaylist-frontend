@@ -56,7 +56,7 @@ function onlineStatus(reg) {
 const ExpandedComponent = ({ data }) => (
   <Container fluid>
     <Row>
-      <Col xs={2} md={2}>
+      <Col xs={3} md={2}>
         <b>Homepage:</b>
       </Col>{" "}
       <Col>
@@ -66,7 +66,7 @@ const ExpandedComponent = ({ data }) => (
       </Col>
     </Row>
     <Row>
-      <Col xs={2} md={2}>
+      <Col xs={3} md={2}>
         <b>Admin:</b>
       </Col>{" "}
       <Col>
@@ -80,7 +80,7 @@ const ExpandedComponent = ({ data }) => (
       </Col>
     </Row>
     <Row>
-      <Col xs={2} md={2}>
+      <Col xs={3} md={2}>
         <b>Mastodon:</b>
       </Col>{" "}
       <Col>
@@ -90,7 +90,7 @@ const ExpandedComponent = ({ data }) => (
       </Col>
     </Row>
     <Row>
-      <Col xs={2} md={2}>
+      <Col xs={3} md={2}>
         <b>Pleroma:</b>
       </Col>{" "}
       <Col>
