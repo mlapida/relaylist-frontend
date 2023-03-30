@@ -12,7 +12,7 @@ export default function Footer({ children }) {
           <Row className="justify-content-md-center">
             <Col md="auto">
               Created by:{" "}
-              <a rel="me" href="https://mastodon.lapidak.is/@mike">
+              <a rel="me" href="https://me.dm/@mike">
                 <Mastodon /> Mike
               </a>
             </Col>
