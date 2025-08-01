@@ -13,6 +13,11 @@ This document provides the correct configuration for deploying RelayList Fronten
 - **Node.js version:** `20.x` (recommended for better compatibility)
 - **NPM version:** Latest
 
+### Compatibility Configuration
+This project includes a `wrangler.toml` file that sets the required Node.js compatibility flags:
+- **nodejs_compat** - Enables Node.js API compatibility for both production and preview environments
+- **compatibility_date** - Set to `2024-05-30` for stable API behavior
+
 ## Important Notes
 
 ### Updated Build Command
@@ -64,8 +69,16 @@ npm run pages:build
 **Build Fails with "unsupported version" warning:**
 - Ensure you're using the updated build command without `@pre-v1`
 
+**"Node.JS Compatibility Error - no nodejs_compat compatibility flag set":**
+- This is resolved by the `wrangler.toml` file in the repository
+- Ensure the `wrangler.toml` file is included in your deployment
+
 **Dependencies installation errors:**
 - Node.js v20.x or v22.x is recommended over v23.x for better compatibility
+
+**"npm ci can only install packages when package.json and package-lock.json are in sync":**
+- This has been resolved by regenerating the lock file
+- Ensure both files are committed to the repository
 
 **Static assets not loading:**
 - Verify the output directory is set to `/.vercel/output/static`
