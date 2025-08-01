@@ -206,7 +206,12 @@ export default function Home() {
     try {
       setLoading(true);
       setError(null);
-      const response = await axios.get("https://api.relaylist.com/relays");
+      
+      // Get API URL from environment variable with fallback
+      const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.relaylist.com';
+      const apiUrl = `${apiBaseUrl}/relays`;
+      
+      const response = await axios.get(apiUrl);
       
       // Validate response data
       if (!response.data || !Array.isArray(response.data)) {

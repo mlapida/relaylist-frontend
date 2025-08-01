@@ -15,11 +15,16 @@ This is the frontend for [RelayList.com](https://relaylist.com). The backend can
    ```bash
    npm install
    ```
-3. Start the development server:
+3. Set up environment variables:
+   ```bash
+   cp .env.local.example .env.local
+   ```
+   Edit `.env.local` with your configuration if needed.
+4. Start the development server:
    ```bash
    npm run dev
    ```
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ### Available Scripts
 
@@ -30,6 +35,21 @@ This is the frontend for [RelayList.com](https://relaylist.com). The backend can
 - `npm run pages:build` - Build for Cloudflare Pages
 - `npm run pages:deploy` - Deploy to Cloudflare Pages
 - `npm run pages:dev` - Development build with Cloudflare optimizations
+
+## Environment Variables
+
+The application uses environment variables for configuration:
+
+### Required Variables
+- `NEXT_PUBLIC_API_BASE_URL` - Base URL for the RelayList API (default: https://api.relaylist.com)
+
+### Optional Variables
+- `NEXT_PUBLIC_API_TIMEOUT` - API request timeout in milliseconds (default: 10000)
+
+### Environment Files
+- `.env.local.example` - Example configuration file
+- `.env.local` - Local development overrides (not committed)
+- `.env.production` - Production environment configuration
 
 ## Deployment
 

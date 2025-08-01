@@ -57,7 +57,12 @@
 - [ ] **Add unit tests** - Write tests for utility functions and components
 - [ ] **Add integration tests** - Test API integration and user interactions
 - [ ] **Update README** - Add development setup and contribution guidelines
-- [ ] **Add environment variables** - Move hardcoded API URL to environment configuration
+- [x] **Add environment variables** - Move hardcoded API URL to environment configuration
+  - ✅ Created environment variable files (.env.local.example, .env.production)
+  - ✅ Updated code to use NEXT_PUBLIC_API_BASE_URL instead of hardcoded URL
+  - ✅ Made CSP headers dynamic based on environment variables
+  - ✅ Added fallback values for robustness
+  - ✅ Updated documentation in README.md and CLOUDFLARE.md
 
 ## 🚀 Deployment & Infrastructure
 

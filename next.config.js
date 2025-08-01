@@ -3,6 +3,10 @@ const nextConfig = {
   reactStrictMode: true,
   
   async headers() {
+    // Get API base URL from environment variable, fallback to default
+    const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.relaylist.com';
+    const apiDomain = new URL(apiBaseUrl).origin;
+    
     return [
       {
         // Apply headers to all routes
@@ -16,7 +20,7 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net", // Bootstrap CDN
               "img-src 'self' data: https:",
               "font-src 'self' https://cdn.jsdelivr.net",
-              "connect-src 'self' https://api.relaylist.com",
+              `connect-src 'self' ${apiDomain}`,
               "frame-ancestors 'none'",
               "base-uri 'self'",
               "form-action 'self'"

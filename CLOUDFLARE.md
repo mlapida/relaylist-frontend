@@ -13,6 +13,17 @@ This document provides the correct configuration for deploying RelayList Fronten
 - **Node.js version:** `20.x` (recommended for better compatibility)
 - **NPM version:** Latest
 
+#### Application Environment Variables
+Configure these in your Cloudflare Pages dashboard under Settings > Environment variables:
+
+**Production:**
+- `NEXT_PUBLIC_API_BASE_URL` = `https://api.relaylist.com`
+- `NEXT_PUBLIC_API_TIMEOUT` = `10000` (optional)
+
+**Preview:**
+- `NEXT_PUBLIC_API_BASE_URL` = `https://api.relaylist.com` (or staging URL)
+- `NEXT_PUBLIC_API_TIMEOUT` = `10000` (optional)
+
 ### Compatibility Configuration
 This project includes a `wrangler.toml` file that sets the required Node.js compatibility flags:
 - **nodejs_compat** - Enables Node.js API compatibility for both production and preview environments
