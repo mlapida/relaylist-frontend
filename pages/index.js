@@ -14,7 +14,7 @@ import {
 } from "react-bootstrap-icons";
 
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 
 function makeFediLink(name) {
   var output, unArray;
@@ -53,27 +53,29 @@ function onlineStatus(reg) {
   return output;
 }
 
-const ExpandedComponent = ({ data }) => (
-  <Container fluid>
+const ExpandedComponent = React.memo(({ data }) => (
+  <Container fluid role="region" aria-label={`Detailed information for ${data.name} relay`}>
     <Row>
       <Col xs={3} md={2}>
-        <b>Homepage:</b>
-      </Col>{" "}
+        <strong>Homepage:</strong>
+      </Col>
       <Col>
-        <a href={data.url} target="_blank" rel="noopener noreferrer">
+        <a href={data.url} target="_blank" rel="noopener noreferrer"
+           aria-label={`Visit ${data.name} homepage (opens in new tab)`}>
           {data.name}
         </a>
       </Col>
     </Row>
     <Row>
       <Col xs={3} md={2}>
-        <b>Admin:</b>
-      </Col>{" "}
+        <strong>Admin:</strong>
+      </Col>
       <Col>
         <a
           href={makeFediLink(data.moderator)}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label={`Contact admin ${data.moderator} (opens in new tab)`}
         >
           {data.moderator}
         </a>
@@ -81,37 +83,43 @@ const ExpandedComponent = ({ data }) => (
     </Row>
     <Row>
       <Col xs={3} md={2}>
-        <b>Mastodon:</b>
-      </Col>{" "}
+        <strong>Mastodon endpoint:</strong>
+      </Col>
       <Col>
-        <a href={data.url + "inbox"} target="_blank" rel="noopener noreferrer">
+        <a href={data.url + "inbox"} target="_blank" rel="noopener noreferrer"
+           aria-label={`Mastodon inbox endpoint for ${data.name} (opens in new tab)`}>
           {data.url}inbox
         </a>
       </Col>
     </Row>
     <Row>
       <Col xs={3} md={2}>
-        <b>Pleroma:</b>
-      </Col>{" "}
+        <strong>Pleroma endpoint:</strong>
+      </Col>
       <Col>
-        <a href={data.url + "actor"} target="_blank" rel="noopener noreferrer">
+        <a href={data.url + "actor"} target="_blank" rel="noopener noreferrer"
+           aria-label={`Pleroma actor endpoint for ${data.name} (opens in new tab)`}>
           {data.url}actor
         </a>
       </Col>
     </Row>
     <Row>
       <Col xs={6} md={12}>
-        <b>Notes:</b>
-        <p>{data.notes}</p>
+        <strong>Notes:</strong>
+        <p>{data.notes || 'No additional notes available'}</p>
       </Col>
     </Row>
     <Row>
       <Col>
-        <i>Last update {moment.unix(Number(data.updated)).fromNow()}</i>
+        <small className="text-muted">
+          Last updated {moment.unix(Number(data.updated)).fromNow()}
+        </small>
       </Col>
     </Row>
   </Container>
-);
+));
+
+ExpandedComponent.displayName = 'ExpandedComponent';
 
 const columns = [
   {
@@ -190,41 +198,70 @@ const columns = [
 ];
 
 export default function Home() {
-  const [data, setData, updateAt] = useState([]);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchRelays = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const response = await axios.get("https://api.relaylist.com/relays");
+      
+      // Validate response data
+      if (!response.data || !Array.isArray(response.data)) {
+        throw new Error('Invalid data format received from API');
+      }
+      
+      // Basic validation for required fields
+      const validatedData = response.data.filter(relay => 
+        relay && 
+        typeof relay.name === 'string' && 
+        typeof relay.url === 'string' &&
+        relay.url.startsWith('http')
+      );
+      
+      setData(validatedData);
+    } catch (err) {
+      setError('Failed to load relay data. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    axios
-      .get("https://api.relaylist.com/relays")
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, []);
+    fetchRelays();
+  }, [fetchRelays]);
+
+  // Memoize columns to prevent recreation on every render
+  const memoizedColumns = useMemo(() => columns, []);
 
   return (
     <>
       <Layout>
-        <Row>
-          <Col></Col>
-          <Col xs={10}>
-            <Alert variant="warning">
-              <ExclamationTriangleFill />
-              &nbsp;Please add relays with caution!
-            </Alert>
-          </Col>
-          <Col></Col>
-        </Row>
-        <Row>
-          <Col></Col>
-          <Col xs={10}>
-            <Accordion>
-              <Accordion.Item eventKey="0">
-                <Accordion.Header>
-                  <InfoCircleFill />
-                  &nbsp;What is Relay List?
-                </Accordion.Header>
+        <header>
+          <Row>
+            <Col></Col>
+            <Col xs={10}>
+              <Alert variant="warning" role="alert" aria-live="polite">
+                <ExclamationTriangleFill aria-hidden="true" />
+                &nbsp;Please add relays with caution!
+              </Alert>
+            </Col>
+            <Col></Col>
+          </Row>
+        </header>
+        <section aria-labelledby="info-section">
+          <Row>
+            <Col></Col>
+            <Col xs={10}>
+              <h1 className="visually-hidden" id="info-section">Information about Relay List</h1>
+              <Accordion>
+                <Accordion.Item eventKey="0">
+                  <Accordion.Header>
+                    <InfoCircleFill aria-hidden="true" />
+                    &nbsp;What is Relay List?
+                  </Accordion.Header>
                 <Accordion.Body>
                   <p>
                     Relay List is a site that indexes and tracks various
@@ -301,26 +338,50 @@ export default function Home() {
           </Col>
           <Col></Col>
         </Row>
-        <Row>
-          <p></p>
-        </Row>
-        <Row>
-          <div className="card">
-            <DataTable
-              columns={columns}
-              data={data}
-              defaultSortFieldId={3}
-              defaultSortAsc={false}
-              expandableRows
-              expandOnRowClicked
-              expandableRowsComponent={ExpandedComponent}
-              striped
-              bordered
-              hover
-              me
-            />
-          </div>
-        </Row>
+        </section>
+        <main aria-labelledby="relay-table-heading">
+          <Row>
+            <Col>
+              <h2 className="visually-hidden" id="relay-table-heading">ActivityPub Relay Directory</h2>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              {error && (
+                <Alert variant="danger" role="alert" aria-live="assertive">
+                  <ExclamationCircleFill aria-hidden="true" />
+                  &nbsp;{error}
+                </Alert>
+              )}
+              <div className="card"
+                   role="region" 
+                   aria-labelledby="relay-table-heading"
+                   aria-describedby="relay-table-description">
+                <div id="relay-table-description" className="visually-hidden">
+                  Sortable table of ActivityPub relays showing name, address, participant count, registration status, and online status. Click on any row to expand for more details.
+                </div>
+                <DataTable
+                  columns={memoizedColumns}
+                  data={data}
+                  defaultSortFieldId={3}
+                  defaultSortAsc={false}
+                  expandableRows
+                  expandOnRowClicked
+                  expandableRowsComponent={ExpandedComponent}
+                  striped
+                  bordered
+                  hover
+                  progressPending={loading}
+                  progressComponent={
+                    <div role="status" aria-live="polite">
+                      Loading relay data...
+                    </div>
+                  }
+                />
+              </div>
+            </Col>
+          </Row>
+        </main>
       </Layout>
     </>
   );
