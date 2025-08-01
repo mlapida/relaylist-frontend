@@ -65,6 +65,8 @@
   - ✅ Updated @cloudflare/next-on-pages to v1.13.13 (latest)
   - ✅ Added Cloudflare-specific build scripts (pages:build, pages:deploy, pages:dev)
   - ✅ Verified successful build with static output generation
+  - ✅ Created CLOUDFLARE.md deployment documentation
+  - ✅ Updated build command from `@pre-v1` to stable version
 - [ ] **Environment-specific configurations** - Set up staging and production environment configs
 - [ ] **CI/CD pipeline** - Set up automated testing and deployment workflows
 
