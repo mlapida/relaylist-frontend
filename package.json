@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "pages:build": "npx @cloudflare/next-on-pages",
+    "pages:deploy": "wrangler pages deploy",
+    "pages:dev": "npx @cloudflare/next-on-pages --experimental-minify"
   },
   "dependencies": {
     "axios": "^1.2.1",
@@ -22,6 +25,7 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "vercel": "^28.9.0"
+    "@cloudflare/next-on-pages": "^1.13.13",
+    "vercel": "^44.6.6"
   }
 }
